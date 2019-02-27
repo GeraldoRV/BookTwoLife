@@ -19,16 +19,16 @@ import model.Cart;
  */
 public class AddToCartCommand extends FrontCommand {
 
+    private HttpSession session;
+
     @Override
     public void process() {
+        session = request.getSession(true);
         String parameter = request.getParameter("name");
         Cart cart = getCart();
+        
+        addBookIn(cart, parameter);
 
-        if (parameter != null && !parameter.isEmpty()) {
-            Book book = createBook(parameter);
-            cart.addBook(book);
-            saveInSession(cart);
-        }
         try {
             forward("/views/buyer/main.jsp");
         } catch (ServletException | IOException ex) {
@@ -38,7 +38,6 @@ public class AddToCartCommand extends FrontCommand {
     }
 
     private Cart getCart() {
-        HttpSession session = request.getSession(true);
         Cart cart;
         if (session.isNew()) {
             cart = createCart();
@@ -60,11 +59,18 @@ public class AddToCartCommand extends FrontCommand {
     }
 
     private void saveInSession(Cart cart) {
-        HttpSession session = request.getSession(true);
         session.setAttribute("cart", cart);
     }
 
     private Book createBook(String name) {
-        return new Book(name, "En un lugar de la mancha", "Lirico",25.0f );
+        return new Book(name, "En un lugar de la mancha", "Lirico", 25.0f);
+    }
+
+    private void addBookIn(Cart cart, String parameter) {
+        if (parameter != null && !parameter.isEmpty()) {
+            Book book = createBook(parameter);
+            cart.addBook(book);
+            saveInSession(cart);
+        }
     }
 }

@@ -30,7 +30,7 @@
                     <h5>Libro 3</h5> 
                     <p>La sipnosis</p>
                     <small>3 €</small>
-                    <form action="/BookTwoLife/FrontController">
+                    <form action="/BookTwoLife/FrontController">                   
                         <input type="hidden" name="command" value="AddToCartCommand">
                         <input type="hidden" name="name" value="Libro 3">
                         <button type="submit" class="btn btn-warning">Añadir al carrito</button>

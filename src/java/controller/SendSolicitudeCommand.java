@@ -22,13 +22,14 @@ import model.Solicitude;
  */
 public class SendSolicitudeCommand extends FrontCommand {
 
+    private HttpSession session;
+
     @Override
     public void process() {
+        session = request.getSession(true);
         List<Solicitude> solicitudesList = getSolicitudeList();
-        List<Book> books = getBooks();
-        Solicitude newSolicitude = new Solicitude(solicitudesList.size() + 1, books, "Solicitud en proceso", "Fer");
-        solicitudesList.add(newSolicitude);
-        saveSolicitudeList(solicitudesList);
+        addNewSolicitude(solicitudesList);
+        saveInSession(solicitudesList);
         cleanCart();
         try {
             forward("/views/buyer/cart.jsp");
@@ -42,15 +43,17 @@ public class SendSolicitudeCommand extends FrontCommand {
     }
 
     private List<Solicitude> getSolicitudeList() {
-        HttpSession session = request.getSession(true);
+
         List<Solicitude> solicitudeList;
         if (session.isNew()) {
             solicitudeList = createSolicitudeList();
+            createAproveSolitude(solicitudeList);
             session.setAttribute("solicitudeslist", solicitudeList);
 
         } else {
             if (session.getAttribute("solicitudeslist") == null) {
                 solicitudeList = createSolicitudeList();
+                createAproveSolitude(solicitudeList);
 
             } else {
                 solicitudeList = (List<Solicitude>) session.getAttribute("solicitudeslist");
@@ -60,20 +63,28 @@ public class SendSolicitudeCommand extends FrontCommand {
         return solicitudeList;
     }
 
-    private void saveSolicitudeList(List<Solicitude> solicitudeList) {
-        HttpSession session = request.getSession(true);
+    private void saveInSession(List<Solicitude> solicitudeList) {
         session.setAttribute("solicitudeslist", solicitudeList);
     }
 
     private void cleanCart() {
-        HttpSession session = request.getSession(true);
         session.setAttribute("cart", null);
     }
 
     private List<Book> getBooks() {
-        HttpSession session = request.getSession(true);
         Cart cart = (Cart) session.getAttribute("cart");
         return cart.getBooks();
+    }
+
+    private void addNewSolicitude(List<Solicitude> solicitudesList) {
+        List<Book> books = getBooks();
+        Solicitude newSolicitude = new Solicitude(solicitudesList.size() + 1, books, "Solicitud en proceso", "Fernando");
+        solicitudesList.add(newSolicitude);
+    }
+
+    private void createAproveSolitude(List<Solicitude> solicitudeList) {
+        Solicitude solicitude = new Solicitude(1, getBooks(), "Compra aprobada", "Margaret");
+        solicitudeList.add(solicitude);
     }
 
 }

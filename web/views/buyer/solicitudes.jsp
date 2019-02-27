@@ -16,11 +16,13 @@
     </head>
     <body>
         <jsp:include page="partials/navbar.jsp" />
-        <%List<Solicitude> solicitudelist = (List) session.getAttribute("solicitudeslist");
-            
+        <%List<Solicitude> solicitudelist = (List) session.getAttribute("solicitudeslist"); %>
+
+        <%if (solicitudelist == null) {%>
+        <h1>No hay</h1>
+        <%   } else {
         %>
         <div class="container">
-
             <table class="table">
                 <thead>
                     <tr>
@@ -32,23 +34,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%
-                        for (Solicitude elem : solicitudelist) {
-
-
-                    %>
+                    <%for (Solicitude elem : solicitudelist) {%>
                     <tr>
                         <td><%=elem.getIndex()%></td>
                         <td><%=elem.getBooks().size()%></td>
                         <td><%=elem.getSeller()%></td>
                         <td>25€</td>
-                        <td><%=elem.getStatus()%><td>
+
+                        <td><%=elem.getStatus()%>
+                            <%if (elem.getStatus().equals("Compra aprobada")) {%>
+                            <form action="/BookTwoLife/FrontController">
+                                <input type="hidden" name="command" value="PayCommand">
+                                <button type="submit" 
+                                        class="btn btn-warning">Pagar Compra</button>
+                            </form>
+                            <%}%>
+                        <td>
                     </tr>
-                    <%
-                    }%>
+                    <%}%>
                 </tbody>
             </table>
-
+            <%}%>
         </div>
     </body>
 </html>
