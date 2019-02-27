@@ -4,6 +4,8 @@
     Author     : Geraldo
 --%>
 
+<%@page import="model.Book"%>
+<%@page import="model.Cart"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,7 +20,7 @@
 
         <%
             if (session.getAttribute("cart") != null) {
-                List<String> cart = (List) session.getAttribute("cart");
+                Cart cart = (Cart) session.getAttribute("cart");
         %>
         <div class="container">
             <form action="/BookTwoLife/FrontController">
@@ -27,12 +29,16 @@
             </form>
             <ul class="list-group">
                 <%
-                    for (String elem : cart) {%>
+                    for (Book elem : cart.getBooks()) {%>
 
-                <li class="list-group-item d-flex justify-content-between align-items-center"><%=elem%> </li>
-                    <% }
+                <li class="list-group-item justify-content-between align-items-center">
+                    <h5><%=elem.getName()%></h5> 
+                    <span><%=elem.getDescription()%></span><br>
+                    <small><%=elem.getPrice()%> €</small>
+                </li>
+                <% }
 
-                    %>
+                %>
             </ul> 
             <% } else {
             %> 

@@ -4,6 +4,7 @@
     Author     : Geraldo
 --%>
 
+<%@page import="model.Solicitude"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,8 +16,8 @@
     </head>
     <body>
         <jsp:include page="partials/navbar.jsp" />
-        <%List<String> solicitudelist = (List) session.getAttribute("solicitudelist");
-            int i = 1;
+        <%List<Solicitude> solicitudelist = (List) session.getAttribute("solicitudeslist");
+            
         %>
         <div class="container">
 
@@ -32,18 +33,18 @@
                 </thead>
                 <tbody>
                     <%
-                        for (String elem : solicitudelist) {
+                        for (Solicitude elem : solicitudelist) {
 
 
                     %>
                     <tr>
-                        <td><%=i%></td>
-                        <td>23</td>
-                        <td>Fernando</td>
+                        <td><%=elem.getIndex()%></td>
+                        <td><%=elem.getBooks().size()%></td>
+                        <td><%=elem.getSeller()%></td>
                         <td>25€</td>
-                        <td><%=elem%></td>
+                        <td><%=elem.getStatus()%><td>
                     </tr>
-                    <%i++;
+                    <%
                     }%>
                 </tbody>
             </table>

@@ -6,12 +6,12 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
+import model.Book;
+import model.Cart;
 
 /**
  *
@@ -22,10 +22,11 @@ public class AddToCartCommand extends FrontCommand {
     @Override
     public void process() {
         String parameter = request.getParameter("name");
-        List<String> cart = getCart();
+        Cart cart = getCart();
 
         if (parameter != null && !parameter.isEmpty()) {
-            cart.add(parameter);
+            Book book = createBook(parameter);
+            cart.addBook(book);
             saveInSession(cart);
         }
         try {
@@ -36,9 +37,9 @@ public class AddToCartCommand extends FrontCommand {
 
     }
 
-    private List getCart() {
+    private Cart getCart() {
         HttpSession session = request.getSession(true);
-        List<String> cart;
+        Cart cart;
         if (session.isNew()) {
             cart = createCart();
             session.setAttribute("cart", cart);
@@ -48,19 +49,22 @@ public class AddToCartCommand extends FrontCommand {
                 cart = createCart();
             } else {
 
-                cart = (List) session.getAttribute("cart");
+                cart = (Cart) session.getAttribute("cart");
             }
         }
         return cart;
     }
 
-    private List createCart() {
-        return new ArrayList();
+    private Cart createCart() {
+        return new Cart();
     }
 
-    private void saveInSession(List cart) {
+    private void saveInSession(Cart cart) {
         HttpSession session = request.getSession(true);
         session.setAttribute("cart", cart);
     }
 
+    private Book createBook(String name) {
+        return new Book(name, "En un lugar de la mancha", "Lirico",25.0f );
+    }
 }

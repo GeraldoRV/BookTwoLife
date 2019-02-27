@@ -12,6 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
+import model.Book;
+import model.Cart;
+import model.Solicitude;
 
 /**
  *
@@ -21,9 +24,11 @@ public class SendSolicitudeCommand extends FrontCommand {
 
     @Override
     public void process() {
-        List<String> solicitudeList = getSolicitudeList();
-        solicitudeList.add("Solicitud en proceso");
-        saveSolicitudeList(solicitudeList);
+        List<Solicitude> solicitudesList = getSolicitudeList();
+        List<Book> books = getBooks();
+        Solicitude newSolicitude = new Solicitude(solicitudesList.size() + 1, books, "Solicitud en proceso", "Fer");
+        solicitudesList.add(newSolicitude);
+        saveSolicitudeList(solicitudesList);
         cleanCart();
         try {
             forward("/views/buyer/cart.jsp");
@@ -32,37 +37,43 @@ public class SendSolicitudeCommand extends FrontCommand {
         }
     }
 
-    private List<String> createSolicitudeList() {
+    private List<Solicitude> createSolicitudeList() {
         return new ArrayList<>();
     }
 
-    private List<String> getSolicitudeList() {
+    private List<Solicitude> getSolicitudeList() {
         HttpSession session = request.getSession(true);
-        List<String> solicitudeList;
+        List<Solicitude> solicitudeList;
         if (session.isNew()) {
             solicitudeList = createSolicitudeList();
-            session.setAttribute("solicitudelist", solicitudeList);
+            session.setAttribute("solicitudeslist", solicitudeList);
 
         } else {
-            if (session.getAttribute("solicitudelist") == null) {
+            if (session.getAttribute("solicitudeslist") == null) {
                 solicitudeList = createSolicitudeList();
 
             } else {
-                solicitudeList = (List<String>) session.getAttribute("solicitudelist");
+                solicitudeList = (List<Solicitude>) session.getAttribute("solicitudeslist");
 
             }
         }
         return solicitudeList;
     }
 
-    private void saveSolicitudeList(List<String> solicitudeList) {
+    private void saveSolicitudeList(List<Solicitude> solicitudeList) {
         HttpSession session = request.getSession(true);
-        session.setAttribute("solicitudelist", solicitudeList);
+        session.setAttribute("solicitudeslist", solicitudeList);
     }
 
     private void cleanCart() {
         HttpSession session = request.getSession(true);
         session.setAttribute("cart", null);
+    }
+
+    private List<Book> getBooks() {
+        HttpSession session = request.getSession(true);
+        Cart cart = (Cart) session.getAttribute("cart");
+        return cart.getBooks();
     }
 
 }
