@@ -26,7 +26,7 @@ public class AddToCartCommand extends FrontCommand {
         session = request.getSession(true);
         String parameter = request.getParameter("name");
         Cart cart = getCart();
-        
+
         addBookIn(cart, parameter);
 
         try {

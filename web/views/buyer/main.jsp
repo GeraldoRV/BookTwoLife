@@ -17,8 +17,10 @@
         <div class="container">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <h5>Libro 1</h5> 
-                    <p>La sipnosis</p>
+                    <h5>El Principito</h5> 
+                    <p>El principito es un cuento poético que viene acompañado
+                        de ilustraciones hechas con acuarelas por el mismo Saint-Exupéry. 
+                        En él, un piloto se encuentra perdido...</p>
                     <small>3 €</small>
                     <form action="/BookTwoLife/FrontController">
                         <input type="hidden" name="command" value="AddToCartCommand">
@@ -27,18 +29,19 @@
                     </form>
                 </li>
                 <li class="list-group-item">
-                    <h5>Libro 3</h5> 
-                    <p>La sipnosis</p>
+                    <h5>Don Quijote</h5> 
+                    <p>En un lugar de la mancha</p>
                     <small>3 €</small>
                     <form action="/BookTwoLife/FrontController">                   
                         <input type="hidden" name="command" value="AddToCartCommand">
                         <input type="hidden" name="name" value="Libro 3">
+                        <input type="hidden" name="description" value="Libro 3">
                         <button type="submit" class="btn btn-warning">Añadir al carrito</button>
                     </form>
                 </li>
                 <li class="list-group-item">
-                    <h5>Libro 2</h5> 
-                    <p>La sipnosis</p>
+                    <h5>50 Sombras de Gray</h5> 
+                    <p>+ 18</p>
                     <small>3 €</small>
                     <form action="/BookTwoLife/FrontController">
                         <input type="hidden" name="command" value="AddToCartCommand">

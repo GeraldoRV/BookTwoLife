@@ -39,7 +39,7 @@ public class FrontController extends HttpServlet {
         FrontCommand command = getCommand(request);
         command.init(getServletContext(), request, response);
         command.process();
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -99,7 +99,7 @@ public class FrontController extends HttpServlet {
     }
 
     private Class getCommandClass(HttpServletRequest request) {
-         Class result;
+        Class result;
         final String command = "controller." + (String) request.getParameter("command");
         try {
             result = Class.forName(command);

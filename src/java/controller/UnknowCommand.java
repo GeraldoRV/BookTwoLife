@@ -9,20 +9,28 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Geraldo
  */
-public class UnknowCommand extends FrontCommand{
+public class UnknowCommand extends FrontCommand {
 
     @Override
     public void process() {
+
+        String pageContext = request.getHeader("Referer");
+        pageContext = pageContext.substring(pageContext.lastIndexOf("/"));
+        System.out.println(pageContext);
+        HttpSession session = request.getSession(true);
+        session.setAttribute("url", pageContext);
+
         try {
             forward("/unknow.jsp");
         } catch (ServletException | IOException ex) {
             Logger.getLogger(UnknowCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

@@ -13,5 +13,7 @@
     </head>
     <body>
         <h1>Algo ha ido mal! :(</h1>
+        <%String url = (String) session.getAttribute("url");%>
+        <a href="/BookTwoLife/views/buyer<%=url%>">Volver</a>
     </body>
 </html>
