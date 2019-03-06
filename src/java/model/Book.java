@@ -1,9 +1,17 @@
 package model;
 
+import java.io.File;
+import java.io.StringWriter;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author Geraldo
  */
+@XmlRootElement
 public class Book {
 
     private String name;
@@ -13,6 +21,10 @@ public class Book {
 
     private float price;
 
+    public Book() {
+    }
+
+    
     public Book(String name, String description, String genre, float price) {
         this.name = name;
         this.description = description;
@@ -58,6 +70,22 @@ public class Book {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+    
+    public void toXML(){
+        try {
+            File file = new File("C:\\Users\\Geraldo.LAPTOP-09QGLT5H\\Documents\\NetBeansProjects\\AS1819\\BookTwoLife\\src\\java\\controller\\book.xml");
+            JAXBContext jax = JAXBContext.newInstance(Book.class);
+            Marshaller m = jax.createMarshaller();
+
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); 
+            
+            m.marshal(this, file);
+           
+           
+        } catch (JAXBException e) {
+            System.out.println(e.getErrorCode());
+        }
     }
 
 }

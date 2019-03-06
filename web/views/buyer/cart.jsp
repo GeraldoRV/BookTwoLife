@@ -22,7 +22,7 @@
             if (session.getAttribute("cart") != null) {
                 Cart cart = (Cart) session.getAttribute("cart");
         %>
-        <div class="container">
+        <div class="container py-2">
             <form action="/BookTwoLife/FrontController">
                 <input type="hidden" name="command" value="SendSolicitudeCommand">
                 <button type="submit" class="btn btn-outline-warning">Enviar Solicitud</button>

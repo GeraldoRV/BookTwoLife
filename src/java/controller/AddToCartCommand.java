@@ -24,6 +24,7 @@ public class AddToCartCommand extends FrontCommand {
     @Override
     public void process() {
         session = request.getSession(true);
+       
         String parameter = request.getParameter("name");
         Cart cart = getCart();
 
@@ -63,7 +64,16 @@ public class AddToCartCommand extends FrontCommand {
     }
 
     private Book createBook(String name) {
-        return new Book(name, "En un lugar de la mancha", "Lirico", 25.0f);
+
+        switch (name) {
+            case "Quijote":
+                return new Book("Don Quijote", "En un lugar...", "Lírico", 3.f);
+            case "Sombras":
+                return new Book("50 Sombras de Gray", "Para mayores de 18", "Erótico", 3.f);
+            default:
+                return new Book("El Principito", "El principito es un cuento poético que viene acompañado\n"
+                        + " de...", "Lirico", 3.0f);
+        }
     }
 
     private void addBookIn(Cart cart, String parameter) {

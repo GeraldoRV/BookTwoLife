@@ -14,7 +14,7 @@
     </head>
     <body>
         <jsp:include page="partials/navbar.jsp" />
-        <div class="container">
+        <div class="container py-2">
             <ul class="list-group">
                 <li class="list-group-item">
                     <h5>El Principito</h5> 
@@ -23,19 +23,18 @@
                         En él, un piloto se encuentra perdido...</p>
                     <small>3 €</small>
                     <form action="/BookTwoLife/FrontController">
-                        <input type="hidden" name="command" value="AddToCartCommand">
-                        <input type="hidden" name="name" value="Libro 1">
+                        <input type="hidden" name="command" value="SeeBookCommand">
+                        <input type="hidden" name="name" value="Principito">
                         <button type="submit" class="btn btn-warning">Añadir al carrito</button>
                     </form>
                 </li>
                 <li class="list-group-item">
                     <h5>Don Quijote</h5> 
-                    <p>En un lugar de la mancha</p>
+                    <p>En un lugar de la mancha...</p>
                     <small>3 €</small>
                     <form action="/BookTwoLife/FrontController">                   
                         <input type="hidden" name="command" value="AddToCartCommand">
-                        <input type="hidden" name="name" value="Libro 3">
-                        <input type="hidden" name="description" value="Libro 3">
+                        <input type="hidden" name="name" value="Quijote">
                         <button type="submit" class="btn btn-warning">Añadir al carrito</button>
                     </form>
                 </li>
@@ -45,7 +44,7 @@
                     <small>3 €</small>
                     <form action="/BookTwoLife/FrontController">
                         <input type="hidden" name="command" value="AddToCartCommand">
-                        <input type="hidden" name="name" value="Libro 2">
+                        <input type="hidden" name="name" value="Sombras">
                         <button type="submit" class="btn btn-warning">Añadir al carrito</button>
                     </form>
                 </li>

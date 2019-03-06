@@ -23,7 +23,7 @@
         <%   } else {
         %>
 
-        <div class="container">
+        <div class="container py-2">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#home">Aprobadas</a>
@@ -103,7 +103,7 @@
                     </table>
                 </div>
                 <div id="menu2" class="container tab-pane fade"><br>
-                    <h3>Canceldas</h3>
+                    <h3>Canceladas</h3>
                     <span>Ninguna se ha cancelado</span>
                 </div>
             </div> 
