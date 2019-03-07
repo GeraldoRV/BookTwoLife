@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<book>
+    <name>El Principito</name>
+    <description>El principito es un cuento poético que viene acompañado
+ de...</description>
+    <genre>Lirico</genre>
+    <price>3.0</price>
+</book>

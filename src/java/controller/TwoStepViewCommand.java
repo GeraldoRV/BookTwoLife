@@ -30,17 +30,20 @@ import model.PageSeller;
  *
  * @author Geraldo
  */
-public class TwoStepView extends FrontCommand {
+public class TwoStepViewCommand extends FrontCommand {
 
+    private final String PATH = "C:\\Users\\Geraldo.LAPTOP-09QGLT5H\\Documents\\NetBeansProjects\\AS1819\\BookTwoLife\\src\\java\\utilities\\";
     @Override
     public void process() {
-        createExample();
+        PageSeller pg = new PageSeller();
+        pg.find(request.getParameter("name"));
+        pg.toXml();
         try {
             TransformerFactory factory = TransformerFactory.newInstance();
-            StreamSource xslFirstStage = new StreamSource(new File("C:\\Users\\Geraldo.LAPTOP-09QGLT5H\\Documents\\NetBeansProjects\\AS1819\\BookTwoLife\\src\\java\\controller\\firststage.xsl"));
-            StreamSource xslSecondStage = new StreamSource(new File("C:\\Users\\Geraldo.LAPTOP-09QGLT5H\\Documents\\NetBeansProjects\\AS1819\\BookTwoLife\\src\\java\\controller\\secondstage.xsl"));
+            StreamSource xslFirstStage = new StreamSource(new File(PATH+"firststage.xsl"));
+            StreamSource xslSecondStage = new StreamSource(new File(PATH+"secondstage.xsl"));
             Transformer firstTransformer = factory.newTransformer(xslFirstStage);
-            StreamSource xml = new StreamSource(new File("C:\\Users\\Geraldo.LAPTOP-09QGLT5H\\Documents\\NetBeansProjects\\AS1819\\BookTwoLife\\src\\java\\controller\\pageseller.xml"));
+            StreamSource xml = new StreamSource(new File(PATH+"pageseller.xml"));
             PrintWriter writer = response.getWriter();
             SAXTransformerFactory factory1 = (SAXTransformerFactory) SAXTransformerFactory.newInstance();
             TransformerHandler tfh = factory1.newTransformerHandler(xslSecondStage);
@@ -49,23 +52,13 @@ public class TwoStepView extends FrontCommand {
             firstTransformer.transform(xml, new SAXResult(tfh));
 
         } catch (TransformerConfigurationException | IOException ex) {
-            Logger.getLogger(TwoStepView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TwoStepViewCommand.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TransformerException ex) {
-            Logger.getLogger(TwoStepView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TwoStepViewCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    private void createExample() {
-      Book book = new Book();
-      Book ook = new Book();
-      book = book.find("s");
-      ook = ook.find("s");
-      PageSeller ju = new PageSeller();
-      ju.setSellerName("Juan");
-      ju.setBookList(Arrays.asList(book,ook));
-      ju.toXml();
-      
-    }
+    
 
 }

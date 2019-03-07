@@ -19,6 +19,13 @@
     </xsl:template>
     <xsl:template match="table"> 
         <table>
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Genero</th>
+                <th>Precio</th>
+            </tr></thead>
              <xsl:apply-templates/>
         </table>
     </xsl:template>

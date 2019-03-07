@@ -20,18 +20,20 @@ import model.Book;
  *
  * @author Geraldo
  */
-public class SeeBookCommand extends FrontCommand {
+public class TransformViewCommand extends FrontCommand {
+
+    private final String PATH = "C:\\Users\\Geraldo.LAPTOP-09QGLT5H\\Documents\\NetBeansProjects\\AS1819\\BookTwoLife\\src\\java\\utilities\\";
 
     @Override
     public void process() {
         Book book = new Book();
-        book = book.find("a");
+        book = book.find(request.getParameter("name"));
         book.toXML();
         try {
             TransformerFactory factory = TransformerFactory.newInstance();
-            StreamSource xsl = new StreamSource(new File("C:\\Users\\Geraldo.LAPTOP-09QGLT5H\\Documents\\NetBeansProjects\\AS1819\\BookTwoLife\\src\\java\\controller\\book.xsl"));
+            StreamSource xsl = new StreamSource(new File(PATH + "book.xsl"));
             Transformer newTransformer = factory.newTransformer(xsl);
-            StreamSource xml = new StreamSource(new File("C:\\Users\\Geraldo.LAPTOP-09QGLT5H\\Documents\\NetBeansProjects\\AS1819\\BookTwoLife\\src\\java\\controller\\book.xml"));
+            StreamSource xml = new StreamSource(new File(PATH + "book.xml"));
             PrintWriter writer = response.getWriter();
             Result result = new StreamResult(writer);
             newTransformer.transform(xml, result);

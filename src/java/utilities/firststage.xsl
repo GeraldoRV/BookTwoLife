@@ -21,27 +21,27 @@
             <xsl:apply-templates/>
         </table>
     </xsl:template>
-    <xsl:template match="book">
+    <xsl:template match="books">
         <row>
             <xsl:apply-templates/>
         </row>
     </xsl:template> 
-    <xsl:template match="book/description">
+    <xsl:template match="books/description">
         <cell>
             <xsl:apply-templates/>
         </cell>
     </xsl:template> 
-    <xsl:template match="book/genre">
+    <xsl:template match="books/genre">
         <cell>
             <xsl:apply-templates/>
         </cell>
     </xsl:template> 
-    <xsl:template match="book/price">
+    <xsl:template match="books/price">
         <cell>
             <xsl:apply-templates/>
         </cell>
     </xsl:template> 
-    <xsl:template match="book/name">
+    <xsl:template match="books/name">
         <cell>
             <xsl:apply-templates/>
         </cell>

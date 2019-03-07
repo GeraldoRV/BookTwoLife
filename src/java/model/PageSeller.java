@@ -6,7 +6,11 @@
 package model;
 
 import java.io.File;
+import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -21,13 +25,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement
 @XmlType(propOrder = {"sellerName","bookList"})
 public class PageSeller {
-    private List<Book> bookList;
+
+    private BookList bookList;
     private String sellerName;
 
     public PageSeller() {
     }
 
-    public void setBookList(List<Book> bookList) {
+    public void setBookList(BookList bookList) {
         this.bookList = bookList;
     }
 
@@ -35,28 +40,49 @@ public class PageSeller {
         this.sellerName = sellerName;
     }
 
-    public List<Book> getBookList() {
+    public BookList getBookList() {
         return bookList;
     }
 
     public String getSellerName() {
         return sellerName;
     }
-    public void toXml(){
+    public void find(String name){
+        sellerName = name;
+        createBook();
+        
+    }
+
+    public void toXml() {
         try {
             File file = new File("C:\\Users\\Geraldo.LAPTOP-09QGLT5H\\"
-                    + "Documents\\NetBeansProjects\\AS1819\\BookTwoLife\\src\\java\\controller\\pageseller.xml");
+                    + "Documents\\NetBeansProjects\\AS1819\\BookTwoLife\\src\\java\\utilities\\pageseller.xml");
             JAXBContext jax = JAXBContext.newInstance(PageSeller.class);
             Marshaller m = jax.createMarshaller();
 
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); 
-            
-            m.marshal(this, file); 
-           
-           
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            StringWriter stringWriter = new StringWriter();
+            m.marshal(this, file);
+            m.marshal(this, stringWriter);
+            System.out.println("s");
+            System.out.println(stringWriter.toString());
+
         } catch (JAXBException e) {
             System.out.println(e.getErrorCode());
+            System.out.println("root");
+            Logger.getLogger(PageSeller.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
+
+    private void createBook() {
+        List<Book> bookList = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            Book book = new Book();
+            book  = book.find(""+i);
+            bookList.add(book);
+        }
+        this.bookList = new BookList();
+        this.bookList.setBooks(bookList);
+    }
+
 }
