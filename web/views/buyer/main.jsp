@@ -23,7 +23,7 @@
                         En él, un piloto se encuentra perdido...</p>
                     <small>3 €</small>
                     <form action="/BookTwoLife/FrontController">
-                        <input type="hidden" name="command" value="SeeBookCommand">
+                        <input type="hidden" name="command" value="TwoStepView">
                         <input type="hidden" name="name" value="Principito">
                         <button type="submit" class="btn btn-warning">Añadir al carrito</button>
                     </form>

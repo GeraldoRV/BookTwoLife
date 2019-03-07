@@ -6,12 +6,14 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
  * @author Geraldo
  */
 @XmlRootElement
+@XmlType(propOrder = {"name","description","genre","price"})
 public class Book {
 
     private String name;
@@ -74,18 +76,30 @@ public class Book {
     
     public void toXML(){
         try {
-            File file = new File("C:\\Users\\Geraldo.LAPTOP-09QGLT5H\\Documents\\NetBeansProjects\\AS1819\\BookTwoLife\\src\\java\\controller\\book.xml");
+            File file = new File("C:\\Users\\Geraldo.LAPTOP-09QGLT5H\\"
+                    + "Documents\\NetBeansProjects\\AS1819\\BookTwoLife\\src\\java\\controller\\book.xml");
             JAXBContext jax = JAXBContext.newInstance(Book.class);
             Marshaller m = jax.createMarshaller();
 
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); 
             
-            m.marshal(this, file);
+            m.marshal(this, file); 
            
            
         } catch (JAXBException e) {
             System.out.println(e.getErrorCode());
         }
     }
-
+    public Book find(String name){
+        switch (name) {
+            case "Quijote":
+                return new Book("Don Quijote", "En un lugar...", "Lírico", 3.f);
+            case "Sombras":
+                return new Book("50 Sombras de Gray", "Para mayores de 18", "Erótico", 3.f);
+            default:
+                return new Book("El Principito", "El principito es un cuento poético que viene acompañado\n"
+                        + " de...", "Lirico", 3.0f);
+        }
+        
+    }
 }

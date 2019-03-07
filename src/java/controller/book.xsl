@@ -5,23 +5,31 @@
     version="1.0"
 >
 
-    <xsl:template match="/">
+    <xsl:template match="book">
         <html>
             <body>
-                <h1>
-                    <xsl:value-of select="book/name"/>
-                </h1>
-                <h1>
-                    <xsl:value-of select="book/description"/>
-                </h1>
-                <h1>
-                    <xsl:value-of select="book/genre"/>
-                </h1>
-                <h1>
-                    <xsl:value-of select="book/price"/>
-                </h1>
+                <xsl:apply-templates/>
             </body>
         </html>
+    </xsl:template>
+    <xsl:template match="price">
+        <h2>Precio</h2>
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="description">
+        <h2>Descripcion</h2>
+        <xsl:apply-templates/>
+        
+    </xsl:template>
+    <xsl:template match="name">
+        <h2>Nombre</h2>
+        <xsl:apply-templates/>
+        
+    </xsl:template>
+    <xsl:template match="genre">
+        <h2>Genero</h2>
+        <xsl:apply-templates/>
+        
     </xsl:template>
 
   

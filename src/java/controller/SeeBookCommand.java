@@ -24,8 +24,9 @@ public class SeeBookCommand extends FrontCommand {
 
     @Override
     public void process() {
-        Book customer = new Book("El amigo", "sss", "ss",45 );
-        customer.toXML();
+        Book book = new Book();
+        book = book.find("a");
+        book.toXML();
         try {
             TransformerFactory factory = TransformerFactory.newInstance();
             StreamSource xsl = new StreamSource(new File("C:\\Users\\Geraldo.LAPTOP-09QGLT5H\\Documents\\NetBeansProjects\\AS1819\\BookTwoLife\\src\\java\\controller\\book.xsl"));

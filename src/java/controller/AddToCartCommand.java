@@ -24,11 +24,11 @@ public class AddToCartCommand extends FrontCommand {
     @Override
     public void process() {
         session = request.getSession(true);
-       
-        String parameter = request.getParameter("name");
+
+        String idBook = request.getParameter("name");
         Cart cart = getCart();
 
-        addBookIn(cart, parameter);
+        addBookIn(cart, idBook);
 
         try {
             forward("/views/buyer/main.jsp");
@@ -63,24 +63,17 @@ public class AddToCartCommand extends FrontCommand {
         session.setAttribute("cart", cart);
     }
 
-    private Book createBook(String name) {
-
-        switch (name) {
-            case "Quijote":
-                return new Book("Don Quijote", "En un lugar...", "Lírico", 3.f);
-            case "Sombras":
-                return new Book("50 Sombras de Gray", "Para mayores de 18", "Erótico", 3.f);
-            default:
-                return new Book("El Principito", "El principito es un cuento poético que viene acompañado\n"
-                        + " de...", "Lirico", 3.0f);
-        }
-    }
-
-    private void addBookIn(Cart cart, String parameter) {
-        if (parameter != null && !parameter.isEmpty()) {
-            Book book = createBook(parameter);
+    private void addBookIn(Cart cart, String id) {
+        if (id != null && !id.isEmpty()) {
+            Book book = findBook(id);
             cart.addBook(book);
             saveInSession(cart);
         }
+    }
+
+    private Book findBook(String id) {
+        Book book = new Book();
+        book = book.find(id);
+        return book;
     }
 }
