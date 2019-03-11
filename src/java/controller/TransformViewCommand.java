@@ -8,6 +8,8 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringReader;
+import javax.servlet.http.HttpSession;
 import javax.xml.transform.Result;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -28,15 +30,17 @@ public class TransformViewCommand extends FrontCommand {
     public void process() {
         Book book = new Book();
         book = book.find(request.getParameter("name"));
-        book.toXML();
         try {
             TransformerFactory factory = TransformerFactory.newInstance();
             StreamSource xsl = new StreamSource(new File(PATH + "book.xsl"));
+            
             Transformer newTransformer = factory.newTransformer(xsl);
-            StreamSource xml = new StreamSource(new File(PATH + "book.xml"));
-            PrintWriter writer = response.getWriter();
-            Result result = new StreamResult(writer);
+            StreamSource xml = new StreamSource(new StringReader(book.toXML()));
+            
+            PrintWriter out = response.getWriter();
+            Result result = new StreamResult(out);
             newTransformer.transform(xml, result);
+           
         } catch (IOException | TransformerException ioe) {
             System.out.println(ioe.getMessage());
         }

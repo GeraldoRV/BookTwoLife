@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class BookList {
+
     private List<Book> books;
 
     public BookList() {
@@ -26,6 +27,5 @@ public class BookList {
     public void setBooks(List<Book> books) {
         this.books = books;
     }
-            
-    
+
 }

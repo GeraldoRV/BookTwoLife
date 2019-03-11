@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Geraldo
  */
 @XmlRootElement
-@XmlType(propOrder = {"name","description","genre","sellerName","price"})
+@XmlType(propOrder = {"name", "description", "genre", "sellerName", "price"})
 public class Book {
 
     private String name;
@@ -73,20 +73,21 @@ public class Book {
         this.price = price;
     }
 
-    public void toXML() {
+    public String toXML() {
+        StringWriter result = new StringWriter();
         try {
-            File file = new File("C:\\Users\\Geraldo.LAPTOP-09QGLT5H\\"
-                    + "Documents\\NetBeansProjects\\AS1819\\BookTwoLife\\src\\java\\utilities\\book.xml");
             JAXBContext jax = JAXBContext.newInstance(Book.class);
             Marshaller m = jax.createMarshaller();
 
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-
-            m.marshal(this, file);
-
+            StringWriter sw = new StringWriter();
+            m.marshal(this, sw);
+            
+            result = sw;
         } catch (JAXBException e) {
             System.out.println(e.getErrorCode());
         }
+        return result.toString();
     }
 
     public Book find(String name) {

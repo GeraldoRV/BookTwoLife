@@ -24,15 +24,15 @@ public abstract class FrontCommand {
 
     public void init(ServletContext context, HttpServletRequest request, HttpServletResponse response) {
         this.context = context;
-        this.request= request;
-        this.response= response;
+        this.request = request;
+        this.response = response;
     }
 
     abstract public void process();
+
     public void forward(String target) throws ServletException, IOException {
-       RequestDispatcher dispatcher = context.getRequestDispatcher(target);
-       dispatcher.forward(request, response);
-   }
-       
-    
+        RequestDispatcher dispatcher = context.getRequestDispatcher(target);
+        dispatcher.forward(request, response);
+    }
+
 }

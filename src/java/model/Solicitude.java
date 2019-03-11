@@ -12,11 +12,13 @@ import java.util.List;
  * @author Geraldo
  */
 public class Solicitude {
+
     private int index;
     private List<Book> books;
     private String status;
 
     private String seller;
+
     public Solicitude(int index, List<Book> books, String status, String seller) {
         this.index = index;
         this.books = books;
@@ -32,7 +34,6 @@ public class Solicitude {
         this.seller = seller;
     }
 
-    
     public int getIndex() {
         return index;
     }
@@ -56,5 +57,5 @@ public class Solicitude {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
 }
