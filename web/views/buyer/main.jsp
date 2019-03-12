@@ -38,12 +38,6 @@
                             <input type="hidden" name="name" value="Principito">
                             <button type="submit" class="btn btn-warning">Añadir al carrito</button>
                         </form>
-
-                        <form action="/BookTwoLife/FrontController">                   
-                            <input type="hidden" name="command" value="TwoStepViewCommand">
-                            <input type="hidden" name="name" value="Laura">
-                            <button type="submit" class="btn btn-warning">Información del vendedor</button>
-                        </form>
                     </div>
                 </li>
                 <li class="list-group-item group-item">
@@ -65,12 +59,6 @@
                             <input type="hidden" name="name" value="Quijote">
                             <button type="submit" class="btn btn-warning">Añadir al carrito</button>
                         </form>
-
-                        <form action="/BookTwoLife/FrontController">                   
-                            <input type="hidden" name="command" value="TwoStepViewCommand">
-                            <input type="hidden" name="name" value="Marco">
-                            <button type="submit" class="btn btn-warning">Información del vendedor</button>
-                        </form>
                     </div>
                 </li>
                 <li class="list-group-item group-item">
@@ -90,12 +78,6 @@
                             <input type="hidden" name="command" value="AddToCartCommand">
                             <input type="hidden" name="name" value="Sombras">
                             <button type="submit" class="btn btn-warning">Añadir al carrito</button>
-                        </form>
-
-                        <form action="/BookTwoLife/FrontController">                   
-                            <input type="hidden" name="command" value="TwoStepViewCommand">
-                            <input type="hidden" name="name" value="Juan">
-                            <button type="submit" class="btn btn-warning">Información del vendedor</button>
                         </form>
 
                     </div>

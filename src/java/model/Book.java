@@ -13,13 +13,15 @@ import javax.xml.bind.annotation.XmlType;
  * @author Geraldo
  */
 @XmlRootElement
-@XmlType(propOrder = {"name", "description", "genre", "sellerName", "price"})
+@XmlType(propOrder = {"bookid","name", "description", "genre", "sellerName", "price"})
 public class Book {
 
     private String name;
     private String description;
     private String genre;
     private String sellerName;
+    private String bookid;
+
 
     private float price;
 
@@ -31,6 +33,14 @@ public class Book {
         this.description = description;
         this.genre = genre;
         this.price = price;
+    }
+
+    public String getBookid() {
+        return bookid;
+    }
+
+    public void setBookid(String bookid) {
+        this.bookid = bookid;
     }
 
     public String getName() {
@@ -91,19 +101,41 @@ public class Book {
     }
 
     public Book find(String name) {
+        Book book = new Book();
         switch (name) {
             case "Quijote":
-                return new Book("Don Quijote", "En un lugar...", "Lírico", 3.f);
+                book=new Book("Don Quijote", "En un lugar...", "Lírico", 3.f);
+                book.bookid ="quijote";
+                book.sellerName="Laura";
+                break;
             case "1":
-                return new Book("Don Quijote", "En un lugar...", "Lírico", 3.f);
+                book= new Book("Don Quijote", "En un lugar...", "Lírico", 3.f);
+                break;
             case "Sombras":
-                return new Book("50 Sombras de Gray", "Para mayores de 18", "Erótico", 3.f);
+                book = new Book("50 Sombras de Gray", "Para mayores de 18", "Erótico", 3.f);
+                book.bookid ="sombras";
+                book.sellerName="Marco";
+                break;
             case "3":
-                return new Book("50 Sombras de Gray", "Para mayores de 18", "Erótico", 3.f);
-            default:
-                return new Book("El Principito", "El principito es un cuento poético que viene acompañado\n"
+                book= new Book("50 Sombras de Gray", "Para mayores de 18", "Erótico", 3.f);
+                break;
+            case "2":
+                book = new Book("El Principito", "El principito es un cuento poético que viene acompañado\n"
                         + " de...", "Lirico", 3.0f);
+                
+                break;
+            case "Principito":
+                book = new Book("El Principito", "El principito es un cuento poético que viene acompañado\n"
+                        + " de...", "Lirico", 3.0f);
+                book.bookid ="princ";
+                book.sellerName="Juan";
+            break;    
+            default:
+                book = new Book("El Principito", "El principito es un cuento poético que viene acompañado\n"
+                        + " de...", "Lirico", 3.0f);
+                    
         }
+        return book;
 
     }
 }

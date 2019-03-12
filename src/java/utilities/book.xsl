@@ -24,6 +24,7 @@
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
                         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
                 </script>
+                <title>BookTwoLife</title>
             </head>
             <body>
                 
@@ -52,32 +53,45 @@
                         </form>
                     </div>
                 </nav>
-                <div class="container">
-                <xsl:apply-templates/>
-                <a href="/BookTwoLife/views/buyer/main.jsp">Volver</a>
+                <div class="container py-3">
+                    <div class="row">
+                        <div class="col">
+                            <img src="/BookTwoLife/images/{bookid}.jpg" width="100%"  alt="princ"/>
+                        </div>
+                        <div class="col" >
+                            <h1>
+                                <xsl:value-of select="name"/>
+                            </h1>
+                            <span>
+                                <xsl:value-of select="genre"/>
+                            </span>
+                            <p>
+                                <xsl:value-of select="description"/>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <h3>
+                                <xsl:value-of select="price"/>
+                            </h3>
+                            
+                            <h4>
+                                <xsl:value-of select="sellerName"/>
+                            </h4>
+                            
+                            <form action="/BookTwoLife/FrontController">                   
+                                <input type="hidden" name="command" value="TwoStepViewCommand"/>
+                                <input type="hidden" name="name" value="{sellerName}"/>
+                                <button type="submit" class="btn btn-warning">Información del vendedor</button>
+                            </form>
+                        
+                        </div>
+                        
+                    </div>
+                    
+                    <a href="/BookTwoLife/views/buyer/main.jsp">Volver</a>
                 </div>
             </body>
         </html>
     </xsl:template>
-    <xsl:template match="price">
-        <h2>Precio</h2>
-        <xsl:apply-templates/>
-    </xsl:template>
-    <xsl:template match="description">
-        <h2>Descripcion</h2>
-        <xsl:apply-templates/>
-        
-    </xsl:template>
-    <xsl:template match="name">
-        <h2>Nombre</h2>
-        <xsl:apply-templates/>
-        
-    </xsl:template>
-    <xsl:template match="genre">
-        <h2>Genero</h2>
-        <xsl:apply-templates/>
-        
-    </xsl:template>
-
-  
+    <xsl:output method="html"/>
 </xsl:stylesheet>
